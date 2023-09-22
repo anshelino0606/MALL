@@ -52,7 +52,7 @@ public:
 
     bool changePrice();
     std::string getInfo();
-    std::ostream writeInfoToFile();
+    void writeInfoToFile(std::string filename);
     unsigned int daysFromProduction();
     unsigned int calculateSpace();
 
@@ -75,6 +75,8 @@ public:
     void setHasDiscountCard(bool hasDiscountCard);
     void setDiscount(Discount discount);
     void setExpirationDate(const Date& expirationDate);
+    void setName(std::string name);
+    void setProducer(std::string producer);
 
     /*
      * OPERATORS

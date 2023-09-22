@@ -99,9 +99,9 @@ std::string Item::getInfo() {
 
 }
 
-std::ostream Item::writeInfoToFile() {
+void Item::writeInfoToFile(std::string filename) {
 
-    std::ofstream file("item.txt");
+    std::ofstream file(filename);
     file << getInfo();
     file.close();
 
@@ -255,6 +255,14 @@ std::istream &operator>>(std::istream &is, Item &item) {
     is >> item.name >> item.producer >> item.price >> item.productionDate >> item.expirationDate >> item.width >> item.height;
     return is;
 
+}
+
+void Item::setName(std::string name) {
+    this->name = name;
+}
+
+void Item::setProducer(std::string producer) {
+    this->producer = producer;
 }
 
 

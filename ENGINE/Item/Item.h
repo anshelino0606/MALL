@@ -31,6 +31,7 @@ public:
      *  - change price (if there is a discountCard)
      *  - return info
      *  - from production date to this day
+     *  - calculate space of an object
      */
 
     /*
@@ -40,6 +41,19 @@ public:
     // TODO: implement getters and setters
 
 
+    /*
+     * OPERATORS
+     */
+
+    // TODO: implement operators
+
+
+    /*
+     * GRAPHICS PART
+     */
+
+    void render();
+    void update();
 
 
     // Destructor
@@ -53,6 +67,9 @@ private:
     // TODO: implement Date of production and expiration date
     // TODO: implement price array for amount of items
     std::string producer;
+
+    unsigned int width;
+    unsigned int height;
 
 };
 

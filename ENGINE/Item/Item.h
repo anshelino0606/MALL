@@ -67,14 +67,9 @@ public:
     Date getProductionDate() const;
     Date getExpirationDate() const;
 
-    void setName(const std::string& name);
     void setPrice(unsigned int price);
     void setHasDiscountCard(bool hasDiscountCard);
     void setDiscount(Discount discount);
-    void setProducer(const std::string& producer);
-    void setWidth(unsigned int width);
-    void setHeight(unsigned int height);
-    void setProductionDate(const Date& productionDate);
     void setExpirationDate(const Date& expirationDate);
 
     /*

@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.26)
-project(MALL)
+project(ENGINE/Mall)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(MALL
-        main.cpp)
+add_executable(
+        main.cpp
+        ENGINE/Item/Item.cpp)

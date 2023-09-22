@@ -30,6 +30,11 @@ public:
     Shop(Shop&& other) noexcept;
 
     /*
+     * Merging two shops, so that they are combined into 3rd
+     */
+    Shop(const Shop& first, const Shop& second);
+
+    /*
      * METHODS
      */
 
@@ -46,6 +51,12 @@ public:
      */
     void print() const;
     void print(std::ostream& os) const;
+
+    /*
+     * Merges two shops, so that the second one overwrites the first one
+     */
+    void merge(const Shop& other);
+
 
 
     /*

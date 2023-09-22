@@ -221,3 +221,33 @@ void Shop::print(std::ostream& os) const {
     }
 
 }
+
+
+void Shop::merge(const Shop& other) {
+    this->name = other.name;
+    this->maxCapacity = other.maxCapacity;
+    this->currentCapacity = other.currentCapacity;
+
+    // Assuming Item has a copy assignment operator
+    delete[] this->items;
+    this->items = new Item[this->maxCapacity];
+    for (unsigned int i = 0; i < this->currentCapacity; ++i) {
+        this->items[i] = other.items[i];
+    }
+}
+
+Shop::Shop(const Shop &first, const Shop &second) {
+    
+    this->name = first.name + " & " + second.name;
+    this->maxCapacity = first.maxCapacity + second.maxCapacity;
+    this->currentCapacity = first.currentCapacity + second.currentCapacity;
+
+    this->items = new Item[this->maxCapacity];
+    for (unsigned int i = 0; i < first.currentCapacity; ++i) {
+        this->items[i] = first.items[i];
+    }
+    for (unsigned int i = 0; i < second.currentCapacity + first.currentCapacity; ++i) {
+        this->items[i + first.currentCapacity] = second.items[i];
+    }
+
+}

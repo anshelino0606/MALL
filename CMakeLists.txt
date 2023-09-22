@@ -6,4 +6,5 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(
         main.cpp
         ARCHITECTURE/Item/Item.cpp
-        ARCHITECTURE/Date/Date.cpp)
+        ARCHITECTURE/Date/Date.cpp
+        ARCHITECTURE/Shop/Shop.cpp)

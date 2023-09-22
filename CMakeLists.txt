@@ -9,4 +9,8 @@ add_executable(
         ARCHITECTURE/Date/Date.cpp
         ARCHITECTURE/Shop/Shop.cpp
         main.cpp
+        ARCHITECTURE/ShoppingCart/ShoppingCart.cpp
+        ARCHITECTURE/Brand/Brand.cpp
+        ARCHITECTURE/Mall/Mall.cpp
 )
+

@@ -125,5 +125,146 @@ unsigned int Item::calculateSpace() {
 
 }
 
+std::string Item::getName() const {
+    return name;
+}
+
+unsigned int Item::getPrice() const {
+    return price;
+}
+
+bool Item::getHasDiscountCard() const {
+    return hasDiscountCard;
+}
+
+Discount Item::getDiscount() const {
+    return discount;
+}
+
+std::string Item::getProducer() const {
+    return producer;
+}
+
+unsigned int Item::getWidth() const {
+    return width;
+}
+
+unsigned int Item::getHeight() const {
+    return height;
+}
+
+Date Item::getProductionDate() const {
+    return productionDate;
+}
+
+Date Item::getExpirationDate() const {
+    return expirationDate;
+}
+
+void Item::setPrice(unsigned int price) {
+    this->price = price;
+}
+
+void Item::setHasDiscountCard(bool hasDiscountCard) {
+    this->hasDiscountCard = hasDiscountCard;
+}
+
+void Item::setDiscount(Discount discount) {
+    this->discount = discount;
+}
+
+void Item::setExpirationDate(const Date &expirationDate) {
+    this->expirationDate = expirationDate;
+}
+
+Item &Item::operator=(const Item &item) {
+
+    if (this == &item) {
+        return *this;
+    }
+
+    // Perform deep copy of Item members
+    this->name = item.name;
+    this->producer = item.producer;
+    this->price = item.price;
+    this->hasDiscountCard = item.hasDiscountCard;
+    this->discount = item.discount;
+    this->productionDate = item.productionDate;
+    this->expirationDate = item.expirationDate;
+    this->width = item.width;
+    this->height = item.height;
+
+    return *this;
+
+}
+
+bool Item::operator==(const Item &item) const {
+
+    return this->name == item.name &&
+           this->producer == item.producer &&
+           this->price == item.price &&
+           this->hasDiscountCard == item.hasDiscountCard &&
+           this->discount == item.discount &&
+           this->productionDate == item.productionDate &&
+           this->expirationDate == item.expirationDate &&
+           this->width == item.width &&
+           this->height == item.height;
+
+}
+
+bool Item::operator!=(const Item &item) const {
+
+    return !(*this == item);
+
+}
+
+bool Item::operator<(const Item &item) const {
+
+    return this->price < item.price;
+
+}
+
+bool Item::operator>(const Item &item) const {
+
+    return this->price > item.price;
+
+}
+
+bool Item::operator<=(const Item &item) const {
+
+    return !(*this > item);
+
+}
+
+bool Item::operator>=(const Item &item) const {
+
+    return !(*this < item);
+
+}
+
+
+std::ostream &operator<<(std::ostream &os, const Item &item) {
+
+    os << item.name << " " << item.producer << " " << item.price << " " << item.hasDiscountCard << " " << static_cast<int>(item.discount) << " " << item.productionDate << " " << item.expirationDate << " " << item.width << " " << item.height;
+    return os;
+
+}
+
+std::istream &operator>>(std::istream &is, Item &item) {
+
+    is >> item.name >> item.producer >> item.price >> item.productionDate >> item.expirationDate >> item.width >> item.height;
+    return is;
+
+}
+
+
+
+
+
+
+
+
+
+
 
 

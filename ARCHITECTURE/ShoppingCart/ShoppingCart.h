@@ -6,6 +6,7 @@
 #define MALL_SHOPPINGCART_H
 
 #include "../Item/Item.h"
+#include <iostream>
 
 class ShoppingCart {
 public:
@@ -21,7 +22,7 @@ public:
     ShoppingCart(unsigned int width, unsigned int height, Item* items);
     
     // Copy constructor
-    ShoppingCart(const ShoppingCart& shoppingCart);
+    ShoppingCart(const ShoppingCart& other);
     
     // Move constructor
     ShoppingCart(ShoppingCart&& shoppingCart);
@@ -48,7 +49,7 @@ public:
     /*
      * Calculates optimal space for items in cart
      */
-    float calculateOptimalPlacement();
+    float calculateOptimalSpace();
     
     /*
      * GRAPHICS PART
@@ -62,6 +63,9 @@ public:
     void doOptimalPlacement();
     
 private:
+
+    unsigned int currentCapacity;
+    unsigned int maxCapacity;
     
     float width;
     float height;

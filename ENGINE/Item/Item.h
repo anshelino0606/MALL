@@ -100,7 +100,7 @@ public:
 
 
     // Destructor
-    ~Item();
+    ~Item() = default;
 
 private:
 

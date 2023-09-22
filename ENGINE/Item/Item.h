@@ -6,6 +6,7 @@
 #define MALL_ITEM_H
 
 #include <string>
+#include <time.h>
 #include "../Date/Date.h"
 
 enum class Discount {
@@ -26,7 +27,10 @@ public:
     Item();
 
     // Init constructor
-    Item(std::string name, unsigned int price);
+    Item(std::string name, std::string producer,
+         unsigned int price, bool hasDiscountCard, Discount discount,
+         Date productionDate, Date expirationDate,
+         unsigned int width, unsigned int height);
 
     // Copy constructor
     Item(const Item& item);

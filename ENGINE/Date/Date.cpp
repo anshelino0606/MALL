@@ -111,6 +111,21 @@ bool Date::operator!=(const Date &other) const {
     return !(*this == other);
 }
 
+Date& Date::operator+(const Date& other) {
+    this->year += other.year;
+    this->month += other.month;
+    this->day += other.day;
+    return *this;
+}
+
+Date& Date::operator-(const Date& other) {
+    this->year -= other.year;
+    this->month -= other.month;
+    this->day -= other.day;
+    return *this;
+}
+
+
 std::string Date::toString() {
     return std::to_string(year) + "-" + std::to_string(month) + "-" + std::to_string(day);
 }

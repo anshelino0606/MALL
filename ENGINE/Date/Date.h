@@ -43,6 +43,10 @@ public:
     bool operator==(const Date& other) const;
     bool operator!=(const Date& other) const;
 
+    Date& operator+(const Date& other);
+    Date& operator-(const Date& other);
+
+
     // Destructor
     ~Date() = default;
 

@@ -6,6 +6,8 @@
 #define ENGINE_MALL_SHOP_H
 
 #include "../Item/Item.h"
+#include <fstream>
+#include <iostream>
 
 class Shop {
 
@@ -19,7 +21,7 @@ public:
     Shop();
 
     // Init constructor
-    Shop(const std::string& name, unsigned int maxCapacity);
+    Shop(const std::string& name, unsigned int maxCapacity, Item* items);
 
     // Copy constructor
     Shop(const Shop& other);
@@ -46,7 +48,19 @@ public:
     void print(std::ostream& os) const;
 
 
+    /*
+     * GETTERS AND SETTERS
+     */
 
+    unsigned int getMaxCapacity() const;
+    unsigned int getCurrentCapacity() const;
+    Item* getItems() const;
+    std::string getName() const;
+
+    void setMaxCapacity(unsigned int maxCapacity);
+    void setCurrentCapacity(unsigned int currentCapacity);
+    void setItems(Item* items);
+    void setName(const std::string& name);
 
     /*
      * DESCTRUCTOR

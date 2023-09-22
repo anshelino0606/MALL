@@ -2,8 +2,8 @@
 // Created by Anhelina Modenko on 22.09.2023.
 //
 
-#ifndef ENGINE_MALL_SHOP_H
-#define ENGINE_MALL_SHOP_H
+#ifndef MALL_SHOP_H
+#define MALL_SHOP_H
 
 #include "../Item/Item.h"
 #include <fstream>
@@ -72,6 +72,16 @@ public:
     void setCurrentCapacity(unsigned int currentCapacity);
     void setItems(Item* items);
     void setName(const std::string& name);
+
+    /*
+     * GRAPHICS PART
+     */
+
+    void processInput(float dt);
+    void render();
+    void init();
+    void update(float dt);
+    void doCollisions();
 
     /*
      * DESCTRUCTOR

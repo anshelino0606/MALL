@@ -5,4 +5,5 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(
         main.cpp
-        ENGINE/Item/Item.cpp)
+        ENGINE/Item/Item.cpp
+        ENGINE/Date/Date.cpp)

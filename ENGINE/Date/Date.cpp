@@ -110,3 +110,7 @@ bool Date::operator==(const Date &other) const {
 bool Date::operator!=(const Date &other) const {
     return !(*this == other);
 }
+
+std::string Date::toString() {
+    return std::to_string(year) + "-" + std::to_string(month) + "-" + std::to_string(day);
+}

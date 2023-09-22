@@ -8,10 +8,11 @@
 #include <fstream>
 
 class Date {
-// Default constructor
+public:
+    // Default constructor
     Date();
 
-    // Parameterized constructor
+    // with parameters
     Date(int year, int month, int day);
 
     // Copy constructor
@@ -52,6 +53,9 @@ class Date {
     void setYear(int year);
     void setMonth(int month);
     void setDay(int day);
+
+    std::string toString();
+
 
 private:
     int year;

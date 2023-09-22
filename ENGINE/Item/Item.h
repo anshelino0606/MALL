@@ -6,10 +6,22 @@
 #define MALL_ITEM_H
 
 #include <string>
+#include "../Date/Date.h"
+
+enum class Discount {
+    none = 0,
+    three,
+    five,
+    seven
+};
 
 class Item {
 
 public:
+    /*
+     * CONSTRUCTORS
+     */
+
     // Constructor without parameters
     Item();
 
@@ -22,11 +34,11 @@ public:
     // Move constructor
     Item(Item&& item);
 
+
     /*
      * FUNCTIONALITY
      */
 
-    // TODO: implement basic Item functionality
     /*
      *  - change price (if there is a discountCard)
      *  - return info
@@ -34,19 +46,51 @@ public:
      *  - calculate space of an object
      */
 
+    bool changePrice();
+    std::string getInfo();
+    std::ostream writeInfoToFile();
+    unsigned int daysFromProduction();
+    unsigned int calculateSpace();
+
+
     /*
      * GETTERS AND SETTERS
      */
 
-    // TODO: implement getters and setters
+    std::string getName() const;
+    unsigned int getPrice() const;
+    bool getHasDiscountCard() const;
+    Discount getDiscount() const;
+    std::string getProducer() const;
+    unsigned int getWidth() const;
+    unsigned int getHeight() const;
+    Date getProductionDate() const;
+    Date getExpirationDate() const;
 
+    void setName(const std::string& name);
+    void setPrice(unsigned int price);
+    void setHasDiscountCard(bool hasDiscountCard);
+    void setDiscount(Discount discount);
+    void setProducer(const std::string& producer);
+    void setWidth(unsigned int width);
+    void setHeight(unsigned int height);
+    void setProductionDate(const Date& productionDate);
+    void setExpirationDate(const Date& expirationDate);
 
     /*
      * OPERATORS
      */
 
-    // TODO: implement operators
+    Item& operator=(const Item& item);
+    bool operator==(const Item& item) const;
+    bool operator!=(const Item& item) const;
+    bool operator<(const Item& item) const;
+    bool operator>(const Item& item) const;
+    bool operator<=(const Item& item) const;
+    bool operator>=(const Item& item) const;
 
+    friend std::ostream& operator<<(std::ostream& os, const Item& item);
+    friend std::istream& operator>>(std::istream& is, Item& item);
 
     /*
      * GRAPHICS PART
@@ -60,13 +104,20 @@ public:
     ~Item();
 
 private:
+
     std::string name;
+    std::string producer;
+
     // TODO: add brand
     // TODO: add pointer to Shop it belongs
+
     unsigned int price;
-    // TODO: implement Date of production and expiration date
     // TODO: implement price array for amount of items
-    std::string producer;
+    bool hasDiscountCard;
+    Discount discount;
+
+    Date productionDate;
+    Date expirationDate;
 
     unsigned int width;
     unsigned int height;

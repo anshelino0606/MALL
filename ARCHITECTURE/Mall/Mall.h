@@ -6,6 +6,8 @@
 #define MALL_MALL_H
 
 #include "../Shop/Shop.h"
+#include "../../ENGINE/GameLevel/GameObject.h"
+#include "../../ENGINE/GameLevel/GameLevel.h"
 
 class Mall {
 
@@ -20,6 +22,8 @@ public:
      * GRAPHICS
      */
 
+    GameLevel level;
+
     void init();
     void processInput(float dt);
     void update(float dt);
@@ -31,6 +35,7 @@ public:
      * DESTRUCTOR
      */
     ~Mall();
+
 
 
 private:

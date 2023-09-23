@@ -1,12 +1,12 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include "Addons/glad/glad.h"
+#include "ENGINE/glad/glad.h"
 #include <GLFW/glfw3.h>
 
 #include <assimp/scene.h>
 
-#include "Addons/stb/stb_image.h"
+#include "ENGINE/stb/stb_image.h"
 
 /*
     class to represent texture

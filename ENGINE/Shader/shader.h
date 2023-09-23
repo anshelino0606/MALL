@@ -1,7 +1,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include "Addons/glad/glad.h"
+#include "ENGINE/glad/glad.h"
 
 #include <string>
 #include <sstream>

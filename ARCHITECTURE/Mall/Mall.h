@@ -8,6 +8,9 @@
 #include "../Shop/Shop.h"
 #include "../../ENGINE/GameLevel/GameObject.h"
 #include "../../ENGINE/GameLevel/GameLevel.h"
+#include "../../ENGINE/Renderer/SpriteRenderer.h"
+#include "../../ENGINE/Texture/texture.h"
+#include "../../ENGINE/Shader/shader.h"
 
 class Mall {
 

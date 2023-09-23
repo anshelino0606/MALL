@@ -6,10 +6,10 @@
 #define MALL_1_SPRITERENDERER_H
 #pragma once
 
-#include "Addons/glad/glad.h"
+#include "ENGINE/glad/glad.h"
 #include <GLFW/glfw3.h>
-#include "ENGINE/GRAPHICS/Texture/texture.h"
-#include "ENGINE/GRAPHICS/Shader/shader.h"
+#include "ENGINE/Texture/texture.h"
+#include "ENGINE/Shader/shader.h"
 
 class Game;
 class Shop;

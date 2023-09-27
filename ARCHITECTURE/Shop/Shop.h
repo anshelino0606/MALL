@@ -6,6 +6,8 @@
 #define MALL_SHOP_H
 
 #include "../Item/Item.h"
+#include "../ShoppingCart/ShoppingCart.h"
+#include "ENGINE/Texture/texture.h"
 #include <fstream>
 #include <iostream>
 
@@ -21,7 +23,7 @@ public:
     Shop();
 
     // Init constructor
-    Shop(const std::string& name, unsigned int maxCapacity, Item* items);
+    Shop(unsigned int height, unsigned int width, Texture2D tex, const std::string& name, unsigned int maxCapacity, Item* items = nullptr);
 
     // Copy constructor
     Shop(const Shop& other);
@@ -57,7 +59,7 @@ public:
      */
     void merge(const Shop& other);
 
-
+    Shop* mergeIntoAnotherShop(const Shop& other);
 
     /*
      * GETTERS AND SETTERS
@@ -67,6 +69,7 @@ public:
     unsigned int getCurrentCapacity() const;
     Item* getItems() const;
     std::string getName() const;
+    void printAllItems() const;
 
     void setMaxCapacity(unsigned int maxCapacity);
     void setCurrentCapacity(unsigned int currentCapacity);
@@ -84,6 +87,15 @@ public:
     void doCollisions();
 
     /*
+     * OPERATORS
+     */
+    Shop& operator=(const Shop& other);
+    Shop& operator+(const Shop& other);
+    Shop& operator-(const Shop& other);
+    Shop& operator+=(const Shop& other);
+    Shop& operator-=(const Shop& other);
+
+    /*
      * DESCTRUCTOR
      */
 
@@ -94,6 +106,11 @@ private:
     // Capacity of the shop
     unsigned int maxCapacity;
     unsigned int currentCapacity;
+
+    // Graphics part
+    Texture2D tex;
+    unsigned int height;
+    unsigned int width;
 
     // Items array
     Item* items;

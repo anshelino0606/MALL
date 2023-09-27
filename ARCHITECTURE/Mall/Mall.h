@@ -6,11 +6,21 @@
 #define MALL_MALL_H
 
 #include "../Shop/Shop.h"
-#include "../../ENGINE/GameLevel/GameObject.h"
-#include "../../ENGINE/GameLevel/GameLevel.h"
-#include "../../ENGINE/Renderer/SpriteRenderer.h"
-#include "../../ENGINE/Texture/texture.h"
-#include "../../ENGINE/Shader/shader.h"
+#include "ENGINE/GameLevel/GameObject.h"
+#include "ENGINE/GameLevel/GameLevel.h"
+#include "ENGINE/Renderer/SpriteRenderer.h"
+#include "ENGINE/Texture/texture.h"
+#include "ENGINE/Shader/shader.h"
+#include "ENGINE/ResourceManager/resourceManager.h"
+#include "ENGINE/IO/keyboard.h"
+#include "ENGINE/IO/mouse.h"
+#include "ENGINE/IO/camera.h"
+
+enum class GameStates {
+    GAME_ACTIVE,
+    GAME_IN_SHOP,
+    GAME_IN_CART
+};
 
 class Mall {
 
@@ -26,6 +36,7 @@ public:
      */
 
     GameLevel level;
+    GameStates state;
 
     void init();
     void processInput(float dt);
@@ -45,6 +56,9 @@ private:
     unsigned int width;
     unsigned int height;
 
+    bool keys[1024];
+
+    Camera cam;
     Shop* shops;
 };
 

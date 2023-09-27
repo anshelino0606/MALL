@@ -14,12 +14,12 @@ Item::Item()
 Item::Item(std::string name, std::string producer,
            unsigned int price, bool hasDiscountCard, Discount discount,
            Date productionDate, Date expirationDate,
-           unsigned int width, unsigned int height)
+           unsigned int width, unsigned int height, glm::vec2 pos)
 
            : name(name), producer(producer),
               price(price), hasDiscountCard(hasDiscountCard), discount(discount),
               productionDate(productionDate), expirationDate(expirationDate),
-              width(width), height(height) {}
+              width(width), height(height), pos(pos) {}
 
 
 Item::Item(const Item &item) {

@@ -8,6 +8,9 @@
 #include <string>
 #include <time.h>
 #include "../Date/Date.h"
+#include "ENGINE/glad/glad.h"
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 enum class Discount {
     none = 0,
@@ -30,7 +33,7 @@ public:
     Item(std::string name, std::string producer,
          unsigned int price, bool hasDiscountCard, Discount discount,
          Date productionDate, Date expirationDate,
-         unsigned int width, unsigned int height);
+         unsigned int width, unsigned int height, glm::vec2 pos);
 
     // Copy constructor
     Item(const Item& item);
@@ -99,11 +102,13 @@ public:
 
     void render();
     void update();
+    glm::vec2 pos;
 
 
     // Destructor
     ~Item() = default;
 
+    unsigned int width;
 private:
 
     std::string name;
@@ -120,7 +125,6 @@ private:
     Date productionDate;
     Date expirationDate;
 
-    unsigned int width;
     unsigned int height;
 
 };

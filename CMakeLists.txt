@@ -11,6 +11,17 @@ set(SOURCES
         ARCHITECTURE/ShoppingCart/ShoppingCart.cpp
         ARCHITECTURE/Brand/Brand.cpp
         ARCHITECTURE/Mall/Mall.cpp
+        ENGINE/GameLevel/GameObject.cpp
+        ENGINE/GameLevel/GameLevel.cpp
+        ENGINE/Renderer/SpriteRenderer.cpp
+        ENGINE/ResourceManager/resourceManager.cpp
+        ENGINE/Shader/shader.cpp
+        ENGINE/stb/stb.cpp
+        ENGINE/Texture/texture.cpp
+        ENGINE/IO/camera.cpp
+        ENGINE/IO/keyboard.cpp
+        ENGINE/IO/mouse.cpp
+        ENGINE/glad/glad.c
 )
 
 # Create an executable target named "MALL" from the source files

@@ -115,6 +115,27 @@ void ShoppingCart::setWidthOfCart(float width) {
     this->width = width;
 }
 
+std::vector<Item> ShoppingCart::getItemsVec() {
+    // return vector of items
+    std::vector<Item> itemsVec;
+    for (int i = 0; i < currentCapacity; i++) {
+        itemsVec.push_back(items[i]);
+    }
+    return itemsVec;
+}
+
+void ShoppingCart::render() {
+
+}
+
+void ShoppingCart::init() {
+
+}
+
+void ShoppingCart::update(float dt) {
+
+}
+
 
 
 

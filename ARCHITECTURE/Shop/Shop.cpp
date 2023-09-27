@@ -8,8 +8,8 @@
 Shop::Shop()
     : maxCapacity(), currentCapacity(), items() {}
 
-Shop::Shop(const std::string& name, unsigned int maxCapacity, Item* items)
-    : maxCapacity(maxCapacity), currentCapacity(0) {
+Shop::Shop(unsigned int height, unsigned int width, Texture2D tex, const std::string& name, unsigned int maxCapacity, Item* items)
+    : maxCapacity(maxCapacity), currentCapacity(0), items(items), name(name), height(height), width(width), tex(tex) {
 
     this->maxCapacity = maxCapacity > 0 ? maxCapacity : 0;
     this->currentCapacity = currentCapacity > 0 ? currentCapacity : 0;
@@ -249,5 +249,50 @@ Shop::Shop(const Shop &first, const Shop &second) {
     for (unsigned int i = 0; i < second.currentCapacity + first.currentCapacity; ++i) {
         this->items[i + first.currentCapacity] = second.items[i];
     }
+
+}
+
+Shop *Shop::mergeIntoAnotherShop(const Shop &other) {
+    Shop* newShop = new Shop(*this, other);
+    return newShop;
+}
+
+Shop &Shop::operator=(const Shop &other) {
+    // merge one shop into another
+    this->name = other.name;
+    this->maxCapacity = other.maxCapacity;
+    this->currentCapacity = other.currentCapacity;
+
+    // Assuming Item has a copy assignment operator
+    delete[] this->items;
+    this->items = new Item[this->maxCapacity];
+    for (unsigned int i = 0; i < this->currentCapacity; ++i) {
+        this->items[i] = other.items[i];
+    }
+    return *this;
+}
+
+void Shop::printAllItems() const {
+
+        for (int i = 0; i < currentCapacity; i++) {
+            items[i].getInfo();
+        }
+
+}
+
+
+void Shop::processInput(float dt) {
+
+}
+void Shop::render() {
+
+}
+void Shop::init() {
+
+}
+void Shop::update(float dt) {
+
+}
+void Shop::doCollisions() {
 
 }

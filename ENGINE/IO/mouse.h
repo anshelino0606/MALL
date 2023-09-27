@@ -1,7 +1,7 @@
 #ifndef MOUSE_H
 #define MOUSE_H
 
-#include "Addons/glad/glad.h"
+#include "ENGINE/glad/glad.h"
 #include <GLFW/glfw3.h>
 
 /*

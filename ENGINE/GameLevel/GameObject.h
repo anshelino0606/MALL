@@ -5,11 +5,11 @@
 #ifndef MALL_1_GAMEOBJECT_H
 #define MALL_1_GAMEOBJECT_H
 
-#include "Addons/glad/glad.h"
+#include "ENGINE/glad/glad.h"
 #include <glm/glm.hpp>
 
-#include "./Graphics//texture.h"
-#include "Game/Renderer/SpriteRenderer.h"
+#include "ENGINE/Texture/texture.h"
+#include "ENGINE/Renderer/SpriteRenderer.h"
 //#include "./Algorithms/Collisions/bounds.h"
 
 

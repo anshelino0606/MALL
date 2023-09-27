@@ -8,10 +8,10 @@
 #include <map>
 #include <string>
 
-#include "Addons/glad/glad.h"
+#include "ENGINE/glad/glad.h"
 
-#include "ENGINE/GRAPHICS/Texture/texture.h"
-#include "ENGINE/GRAPHICS/Shader/shader.h"
+#include "ENGINE/Texture/texture.h"
+#include "ENGINE/Shader/shader.h"
 
 // static singleton class
 

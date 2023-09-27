@@ -8,7 +8,7 @@
 #include <sstream>
 #include <fstream>
 
-#include "Addons/stb/stb_image.h"
+#include "ENGINE/stb/stb_image.h"
 
 // Instantiate static variables
 std::map<std::string, Texture2D>    ResourceManager::textures;

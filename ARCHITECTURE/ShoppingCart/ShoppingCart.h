@@ -42,6 +42,7 @@ public:
     float getHeightOfCart();
     float getWidthOfCart();
     Item* getItems();
+    std::vector<Item> getItemsVec();
     
     void setHeightOfCart(float height);
     void setWidthOfCart(float width);

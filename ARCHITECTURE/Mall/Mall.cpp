@@ -6,7 +6,7 @@
 #include "ENGINE/glad/glad.h"
 #include <GLFW/glfw3.h>
 
-const glm::vec2 PLAYER_SIZE(32.0f, 48.0f);
+const glm::vec2 PLAYER_SIZE(38.4f, 57.6f);
 const float PLAYER_VELOCITY(200.0f);
 
 
@@ -142,8 +142,7 @@ void Mall::init()
     ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/SmartShoppingCart/Game/Assets/Tiles/cursor.png", true, "cursor");
 
     GameLevel level1;
-    level1.load("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Maps/walls_walls.csv.txt", this->width, this->height);
-//    level1.load("/Users/anhelinamodenko/Documents/Share/MALL_1/Game/Assets/CSV maps/grocery store_decor.txt", this->width, this->height);
+    level1.load("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Maps/walls_walls.csv", this->width, this->height);
     this->level = level1;
 
     shop = new Shop(this->width, this->height, ResourceManager::getTexture("shop"), "shop1", 10000);

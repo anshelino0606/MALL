@@ -110,7 +110,7 @@ int main()
 //
 //        // manage user input
 //        // -----------------
-//        Supermarket.processInput(deltaTime);
+        Supermarket.processInput(deltaTime);
 //
 //        ImGui::Begin("FPS COUNT");
 //        ImGui::Text("FPS: %.0f", fps);

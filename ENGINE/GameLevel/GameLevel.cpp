@@ -49,8 +49,6 @@ void GameLevel::init(std::vector<std::vector<unsigned int>> tileData, unsigned i
     float unit_width = width / static_cast<float>(widthMap);
     float unit_height = height / static_cast<float>(heightMap);
 
-    unsigned int tileSize = 32;
-
     for (unsigned int y = 0; y < height; ++y) {
         if (y>=tileData.size())
             continue;
@@ -59,28 +57,28 @@ void GameLevel::init(std::vector<std::vector<unsigned int>> tileData, unsigned i
                 continue;
 
             unsigned int tileCode = tileData[y][x];
-            glm::vec2 pos(x * tileSize, y * tileSize);
-            glm::vec2 size(tileSize, tileSize);
+            glm::vec2 pos(x * unit_width, y * unit_height);
+            glm::vec2 size(unit_width, unit_height);
 
             TileType tileType = static_cast<TileType>(tileCode);
 
             if (tileType == TileType::Empty)
                 continue;
 
-            if (tileType == TileType::BarrierFull) {
-                Texture2D tex = ResourceManager::getTexture("player");
-                glm::vec4 color = glm::vec4(1.0f);
-                GameObject obj(pos, size, tex, color, glm::vec2(0.0f));
-                this->tiles.push_back(obj);
-            }
-
+            bool isShop = (tileType == TileType::BarrierHalf);
+            bool isBarrier = (tileType == TileType::BarrierFull);
+            bool isHalfBarrier = (tileType == TileType::BarrierHalf);
 
             Texture2D tex = ResourceManager::getTexture("blank");
 
             glm::vec4 color = glm::vec4(1.0f);
             color.a = 0.0f;
             // handle other
-            GameObject obj(pos, size, tex, color, glm::vec2(0.0f));
+            if (isShop) {
+                GameObject obj(pos, size, tex, color, glm::vec2(0.0f), false, true, isHalfBarrier);
+            }
+
+            GameObject obj(pos, size, tex, color, glm::vec2(0.0f), isBarrier, false, isHalfBarrier);
 
             this->tiles.push_back(obj);
 

@@ -47,9 +47,8 @@ The **Mall Management System with Shopping Cart** is a C++ application built usi
 
 ## Screenshots
 
-![Main Menu](screenshots/main_menu.png)
-![Shop Management](screenshots/shop_management.png)
-![Shopping Area](screenshots/shopping_area.png)
+![Main Menu](ADDONS/Images/screen1.png)
+![Shop](ADDONS/Images/shop.png)
 
 ## Contributing
 

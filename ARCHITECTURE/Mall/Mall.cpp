@@ -121,7 +121,7 @@ Mall::~Mall()
 void Mall::init()
 {
     this->state = GameStates::GAME_ACTIVE;
-    ResourceManager::loadShader("/Users/anhelinamodenko/Documents/Share/MALL_1/Algorithms/Shaders/sprite.vert", "/Users/anhelinamodenko/Documents/Share/MALL_1/Algorithms/Shaders/sprite.frag", nullptr, "sprite");
+    ResourceManager::loadShader("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Shaders/sprite.vert", "/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Shaders/sprite.frag", nullptr, "sprite");
     glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(this->width),
                                       static_cast<float>(this->height), 0.0f, -1.0f, 1.0f);
 
@@ -133,17 +133,17 @@ void Mall::init()
     Renderer = new SpriteRenderer(myShader);
 
     shop = nullptr;
-    ResourceManager::loadTexture("/Users/anhelinamodenko/Documents/Share/MALL_1/Game/Assets/Maps/map.png", true, "map");
-    ResourceManager::loadTexture("/Users/anhelinamodenko/Documents/Share/MALL_1/Game/Assets/Tiles/pier.png", true, "player");
-    ResourceManager::loadTexture("/Users/anhelinamodenko/Documents/Share/MALL_1/Game/Assets/Tiles/transparent.png", true, "blank");
-    ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/SmartShoppingCart/Game/Assets/Tiles/Box.png", true, "box");
-    ResourceManager::loadTexture("/Users/anhelinamodenko/Documents/Share/MALL_1/Game/Assets/Maps/shop.png", true, "shop");
-    ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/SmartShoppingCart/Game/Assets/Maps/cart.png", true, "cart");
+    ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/map.png", true, "map");
+    ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/pier.png", true, "player");
+    ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/transparent.png", true, "blank");
+    ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/Box.png", true, "box");
+    ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/shop.png", true, "shop");
+    ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/cart.png.png", true, "cart");
     ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/SmartShoppingCart/Game/Assets/Tiles/cursor.png", true, "cursor");
 
     GameLevel level1;
-    level1.load("/Users/anhelinamodenko/Documents/Share/MALL_1/Game/Assets/CSV maps/grocery store_walls.txt", this->width, this->height);
-    level1.load("/Users/anhelinamodenko/Documents/Share/MALL_1/Game/Assets/CSV maps/grocery store_decor.txt", this->width, this->height);
+    level1.load("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Maps/walls_walls.csv.txt", this->width, this->height);
+//    level1.load("/Users/anhelinamodenko/Documents/Share/MALL_1/Game/Assets/CSV maps/grocery store_decor.txt", this->width, this->height);
     this->level = level1;
 
     shop = new Shop(this->width, this->height, ResourceManager::getTexture("shop"), "shop1", 10000);

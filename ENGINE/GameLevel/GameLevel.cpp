@@ -67,7 +67,15 @@ void GameLevel::init(std::vector<std::vector<unsigned int>> tileData, unsigned i
             if (tileType == TileType::Empty)
                 continue;
 
-            Texture2D tex = ResourceManager::getTexture("board");
+            if (tileType == TileType::BarrierFull) {
+                Texture2D tex = ResourceManager::getTexture("player");
+                glm::vec4 color = glm::vec4(1.0f);
+                GameObject obj(pos, size, tex, color, glm::vec2(0.0f));
+                this->tiles.push_back(obj);
+            }
+
+
+            Texture2D tex = ResourceManager::getTexture("blank");
 
             glm::vec4 color = glm::vec4(1.0f);
             color.a = 0.0f;

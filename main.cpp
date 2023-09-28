@@ -1,6 +1,6 @@
 #define GLFW_INCLUDE_GLCOREARB
-#define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 832
+#define WINDOW_WIDTH 1536
+#define WINDOW_HEIGHT 998
 
 #include "ENGINE/glad/glad.h"
 #include <GLFW/glfw3.h>

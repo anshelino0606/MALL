@@ -6,7 +6,8 @@
 #include "ENGINE/glad/glad.h"
 #include <GLFW/glfw3.h>
 
-const glm::vec2 PLAYER_SIZE(38.4f, 57.6f);
+float zoomLevel = 1.2f;
+glm::vec2 PLAYER_SIZE(32.0f*zoomLevel, 44.0f*zoomLevel);
 const float PLAYER_VELOCITY(200.0f);
 
 
@@ -105,7 +106,8 @@ void Mall::doCollisions() {
 }
 
 Mall::Mall(unsigned int width, unsigned int height)
-        : state(GameStates::GAME_ACTIVE), keys(), width(width), height(height), cam(glm::vec2(0.0f, 0.0f), 0.0f, static_cast<float>(width), 0.0f, static_cast<float>(height))
+        : state(GameStates::GAME_ACTIVE), keys(), width(width), height(height),
+        cam(glm::vec3(width / 2, height / 2, 0.0f))
 {
 
 }
@@ -121,13 +123,22 @@ Mall::~Mall()
 void Mall::init()
 {
     this->state = GameStates::GAME_ACTIVE;
+
     ResourceManager::loadShader("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Shaders/sprite.vert", "/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Shaders/sprite.frag", nullptr, "sprite");
-    glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(this->width),
-                                      static_cast<float>(this->height), 0.0f, -1.0f, 1.0f);
+    float zoom = 1.0f;
+    glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(this->width)*zoom,
+                                      static_cast<float>(this->height)*zoom, 0.0f, -1.0f, 1.0f);
 
     ResourceManager::getShader("sprite").activate();
     ResourceManager::getShader("sprite").setInt("image", 0);
+// Update the view matrix
+    glm::mat4 view = cam.getViewMatrix();
+    ResourceManager::getShader("sprite").setMat4("view", view);
+
+// Calculate the projection matrix directly (you can adjust these values as needed)
     ResourceManager::getShader("sprite").setMat4("projection", projection);
+
+
     Shader myShader;
     myShader = ResourceManager::getShader("sprite");
     Renderer = new SpriteRenderer(myShader);
@@ -135,6 +146,10 @@ void Mall::init()
     shop = nullptr;
     ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/map.png", true, "map");
     ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/pier.png", true, "player");
+    ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/pier1.png", true, "player1");
+    ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/pier2.png", true, "player2");
+    ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/pier3.png", true, "player3");
+    ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/pier4.png", true, "player4");
     ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/transparent.png", true, "blank");
     ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/Box.png", true, "box");
     ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/shop.png", true, "shop");
@@ -202,18 +217,22 @@ void Mall::processInput(float dt) {
         if (Keyboard::key(GLFW_KEY_A)) {
             if (Player->pos.x >= 0.0f)
                 Player->pos.x -= velocity;
+            Player->Sprite = ResourceManager::getTexture("player3");
         }
         if (Keyboard::key(GLFW_KEY_D)) {
             if (Player->pos.x <= this->width - Player->size.x)
                 Player->pos.x += velocity;
+            Player->Sprite = ResourceManager::getTexture("player1");
         }
         if (Keyboard::key(GLFW_KEY_W)) {
             if (Player->pos.y >= 0.0f)
                 Player->pos.y -= velocity;
+            Player->Sprite = ResourceManager::getTexture("player2");
         }
         if (Keyboard::key(GLFW_KEY_S)) {
             if (Player->pos.y <= this->height - Player->size.y)
                 Player->pos.y += velocity;
+            Player->Sprite = ResourceManager::getTexture("player4");
         }
         if (Keyboard::keyWentDown(GLFW_KEY_SPACE) ) {
             this->state = GameStates::GAME_IN_SHOP;
@@ -255,6 +274,18 @@ void Mall::processInput(float dt) {
 
 
     }
+    // Update the camera position based on player movement
+    cam.cameraPos.x = Player->pos.x;
+    cam.cameraPos.y = Player->pos.y;
+
+// Calculate half the screen width and height
+    float halfScreenWidth = this->width * 0.5f;
+    float halfScreenHeight = this->height * 0.5f;
+
+// Clamp the camera position to stay within the map boundaries
+    cam.cameraPos.x = glm::clamp(cam.cameraPos.x, halfScreenWidth, width - halfScreenWidth);
+    cam.cameraPos.y = glm::clamp(cam.cameraPos.y, halfScreenHeight, height - halfScreenHeight);
+
 }
 
 void Mall::render() {

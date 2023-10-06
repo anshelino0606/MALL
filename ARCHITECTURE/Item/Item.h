@@ -81,7 +81,7 @@ public:
     void setName(std::string name);
     void setProducer(std::string producer);
 
-    bool compareItems(const Item& a, const Item& b) const;
+    static bool compareItems(const Item& a, const Item& b);
 
     /*
      * OPERATORS

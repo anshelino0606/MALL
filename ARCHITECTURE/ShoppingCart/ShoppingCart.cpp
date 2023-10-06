@@ -7,8 +7,8 @@
 ShoppingCart::ShoppingCart()
  : width(0), height(0), items(nullptr) {}
 
-ShoppingCart::ShoppingCart(unsigned int width, unsigned int height, Item *items)
- : width(width), height(height), items(items) {}
+ShoppingCart::ShoppingCart(unsigned int width, unsigned int height, Texture2D tex ,Item *items)
+ : width(width), height(height), items(items), tex(tex) {}
 
 ShoppingCart::ShoppingCart(const ShoppingCart &other) {
 

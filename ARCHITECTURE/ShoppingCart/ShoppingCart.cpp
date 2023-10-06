@@ -3,6 +3,7 @@
 //
 
 #include "ShoppingCart.h"
+#include <algorithm>
 
 ShoppingCart::ShoppingCart()
  : width(0), height(0), items(nullptr) {}
@@ -133,6 +134,36 @@ void ShoppingCart::init() {
 }
 
 void ShoppingCart::update(float dt) {
+
+}
+
+std::vector<std::vector<Item>> ShoppingCart::calculateOptimalPlacement(const std::vector<Item> &items, float rowLimit) {
+
+    std::vector<Item> sortedItems = items;
+    std::sort(sortedItems.begin(), sortedItems.end(), Item::compareItems);
+
+    std::vector<std::vector<Item>> cart;
+    cart.push_back({});
+    float currentRowWidth = 0.0f;
+    float currentRowHeight = 0.0f;
+
+    for (const Item& item : sortedItems) {
+        // Check if the item fits in the current row
+        if (currentRowWidth + item.width <= this->width && currentRowHeight + item.getHeight() <= rowLimit) {
+            cart.back().push_back(item); // Place item in the current row
+            currentRowWidth += item.width;
+            if (item.getHeight() > currentRowHeight)
+                currentRowHeight = item.getHeight();
+        } else {
+            // Start a new row at the end of the cart
+            cart.push_back({});
+            cart.back().push_back(item);
+            currentRowWidth = item.getWidth();
+            currentRowHeight = item.getHeight();
+        }
+    }
+    return cart;
+
 
 }
 

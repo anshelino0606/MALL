@@ -20,7 +20,7 @@ public:
     ShoppingCart();
     
     // Init constructor
-    ShoppingCart(unsigned int width, unsigned int height, Texture2D tex,Item* items = nullptr);
+    ShoppingCart(unsigned int width, unsigned int height, Texture2D tex, std::vector<Item> items);
     
     // Copy constructor
     ShoppingCart(const ShoppingCart& other);
@@ -42,7 +42,7 @@ public:
     
     float getHeightOfCart();
     float getWidthOfCart();
-    Item* getItems();
+    std::vector<Item> getItems();
     std::vector<Item> getItemsVec();
     
     void setHeightOfCart(float height);
@@ -51,7 +51,7 @@ public:
     /*
      * Calculates optimal space for items in cart
      */
-    float calculateOptimalSpace();
+    float calculateOptimalSpace(float totalRowWidth, float totalRowHeight);
     std::vector<std::vector<Item>> calculateOptimalPlacement(const std::vector<Item>& items, float rowLimit);
     
     /*
@@ -75,7 +75,7 @@ private:
     float width;
     float height;
     
-    Item* items;
+    std::vector<Item> items;
     
     bool isOpen;
 };

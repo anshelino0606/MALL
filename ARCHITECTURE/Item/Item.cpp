@@ -265,12 +265,9 @@ void Item::setProducer(std::string producer) {
     this->producer = producer;
 }
 
-
-
-
-
-
-
+bool Item::compareItems(const Item& a, const Item& b) const {
+    return a.getPrice() > b.getPrice();
+}
 
 
 

@@ -171,8 +171,7 @@ void Mall::init()
     glm::vec2 mousePos = glm::vec2(this->width / 2 ,this->height / 2);
     Player = new GameObject(playerPos, PLAYER_SIZE, ResourceManager::getTexture("player"));
     Cursor = new GameObject(mousePos, PLAYER_SIZE, ResourceManager::getTexture("cursor"));
-    cart = new ShoppingCart(this->width, this->height, ResourceManager::getTexture("cart"), nullptr);
-
+    cart = new ShoppingCart(this->width, this->height, ResourceManager::getTexture("cart"), {});
 
 }
 

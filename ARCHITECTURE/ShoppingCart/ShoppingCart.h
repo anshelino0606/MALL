@@ -6,6 +6,7 @@
 #define MALL_SHOPPINGCART_H
 
 #include "../Item/Item.h"
+#include "ENGINE/Texture/texture.h"
 #include <iostream>
 
 class ShoppingCart {
@@ -19,7 +20,7 @@ public:
     ShoppingCart();
     
     // Init constructor
-    ShoppingCart(unsigned int width, unsigned int height, Item* items);
+    ShoppingCart(unsigned int width, unsigned int height, Texture2D tex,Item* items = nullptr);
     
     // Copy constructor
     ShoppingCart(const ShoppingCart& other);
@@ -64,6 +65,8 @@ public:
     void doOptimalPlacement();
     
 private:
+
+    Texture2D tex;
 
     unsigned int currentCapacity;
     unsigned int maxCapacity;

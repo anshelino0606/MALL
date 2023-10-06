@@ -6,9 +6,9 @@
 #include <algorithm>
 
 ShoppingCart::ShoppingCart()
- : width(0), height(0), items(nullptr) {}
+ : width(0), height(0), items({}) {}
 
-ShoppingCart::ShoppingCart(unsigned int width, unsigned int height, Texture2D tex ,Item *items)
+ShoppingCart::ShoppingCart(unsigned int width, unsigned int height, Texture2D tex , std::vector<Item> items)
  : width(width), height(height), items(items), tex(tex) {}
 
 ShoppingCart::ShoppingCart(const ShoppingCart &other) {
@@ -16,13 +16,13 @@ ShoppingCart::ShoppingCart(const ShoppingCart &other) {
     maxCapacity = other.maxCapacity;
     currentCapacity = other.currentCapacity;
 
-    if (other.items != nullptr) {
-        items = new Item[maxCapacity];
+    if (other.items != std::vector<Item>({})) {
+        items = std::vector<Item>(maxCapacity);
         for (int i = 0; i < currentCapacity; i++) {
             items[i] = other.items[i];
         }
     } else {
-        items = nullptr;
+        items = {};
     }
 
 }
@@ -32,33 +32,32 @@ ShoppingCart::ShoppingCart(ShoppingCart&& shoppingCart) {
         maxCapacity = shoppingCart.maxCapacity;
         currentCapacity = shoppingCart.currentCapacity;
 
-        if (shoppingCart.items != nullptr) {
-            items = new Item[maxCapacity];
+        if (shoppingCart.items != std::vector<Item>({})) {
+            items = std::vector<Item>(maxCapacity);
             for (int i = 0; i < currentCapacity; i++) {
                 items[i] = shoppingCart.items[i];
             }
         } else {
-            items = nullptr;
+            items = {};
         }
         shoppingCart.maxCapacity = 0;
         shoppingCart.currentCapacity = 0;
-        shoppingCart.items = nullptr;
+        shoppingCart.items = {};
 
 }
 
 void ShoppingCart::addToCart(const Item &item) {
 
-    if (items == nullptr) {
-        items = new Item[1];
+    if (items == std::vector<Item>({})) {
+        items = std::vector<Item>(1);
         items[0] = item;
         currentCapacity++;
     } else {
-        Item* temp = new Item[currentCapacity + 1];
+        std::vector<Item> temp = std::vector<Item>(currentCapacity + 1);
         for (int i = 0; i < currentCapacity; i++) {
             temp[i] = items[i];
         }
         temp[currentCapacity] = item;
-        delete[] items;
         items = temp;
         currentCapacity++;
     }
@@ -67,9 +66,9 @@ void ShoppingCart::addToCart(const Item &item) {
 
 void ShoppingCart::removeFromCart(const Item &item) {
 
-    if (items == nullptr) return;
+    if (items == std::vector<Item>()) return;
     else {
-        Item* temp = new Item[currentCapacity - 1];
+        std::vector<Item> temp = std::vector<Item>(currentCapacity + 1);
 
         int j = 0;
         for (int i = 0; i < currentCapacity; i++) {
@@ -78,7 +77,6 @@ void ShoppingCart::removeFromCart(const Item &item) {
                 j++;
             }
         }
-        delete[] items;
         items = temp;
         currentCapacity--;
     }
@@ -87,7 +85,7 @@ void ShoppingCart::removeFromCart(const Item &item) {
 
 void ShoppingCart::printAllItems() {
 
-    if (items == nullptr) return;
+    if (items == std::vector<Item>()) return;
     else {
         for (int i = 0; i < currentCapacity; i++) {
             std::cout << items[i].getName() << std::endl;
@@ -104,7 +102,7 @@ float ShoppingCart::getWidthOfCart() {
     return width;
 }
 
-Item* ShoppingCart::getItems() {
+std::vector<Item> ShoppingCart::getItems() {
     return items;
 }
 
@@ -178,6 +176,33 @@ std::vector<std::vector<Item>> ShoppingCart::calculateOptimalPlacement(const std
 
     return cart;
 
+}
+
+float ShoppingCart::calculateOptimalSpace(float totalRowWidth, float totalRowHeight) {
+    float totalSpace = 0.0f;
+    float currentRowWidth = 0.0f;
+    float currentRowHeight = 0.0f;
+
+    for (unsigned int i = 0; i < currentCapacity; ++i) {
+        const Item& item = items[i];
+
+        // Check if the item can fit in the current row
+        if (currentRowWidth + item.getWidth() <= totalRowWidth) {
+            currentRowWidth += item.getWidth();
+            if (item.getHeight() > currentRowHeight)
+                currentRowHeight = item.getHeight();
+        } else {
+            // Start a new row
+            totalSpace += currentRowWidth * currentRowHeight;
+            currentRowWidth = item.getWidth();
+            currentRowHeight = item.getHeight();
+        }
+    }
+
+    // Add the space of the last row
+    totalSpace += currentRowWidth * currentRowHeight;
+
+    return totalSpace;
 }
 
 

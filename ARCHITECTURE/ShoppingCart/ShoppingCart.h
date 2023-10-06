@@ -52,6 +52,7 @@ public:
      * Calculates optimal space for items in cart
      */
     float calculateOptimalSpace();
+    std::vector<std::vector<Item>> calculateOptimalPlacement(const std::vector<Item>& items, float rowLimit);
     
     /*
      * GRAPHICS PART

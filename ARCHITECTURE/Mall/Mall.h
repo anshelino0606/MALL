@@ -44,13 +44,13 @@ public:
     void render();
     void doCollisions();
 
+    void fromShopToCart();
+
 
     /*
      * DESTRUCTOR
      */
     ~Mall();
-
-
 
 private:
     unsigned int width;
@@ -58,8 +58,10 @@ private:
 
     bool keys[1024];
 
+    bool isShop;
+
     Camera cam;
-    Shop* shops;
+    Shop* shop;
 };
 
 

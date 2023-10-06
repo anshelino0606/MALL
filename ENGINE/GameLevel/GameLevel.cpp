@@ -65,7 +65,7 @@ void GameLevel::init(std::vector<std::vector<unsigned int>> tileData, unsigned i
             if (tileType == TileType::Empty)
                 continue;
 
-            bool isShop = (tileType == TileType::BarrierHalf);
+            bool isShop = (tileType == TileType::Shop);
             bool isBarrier = (tileType == TileType::BarrierFull);
             bool isHalfBarrier = (tileType == TileType::BarrierHalf);
 
@@ -74,11 +74,7 @@ void GameLevel::init(std::vector<std::vector<unsigned int>> tileData, unsigned i
             glm::vec4 color = glm::vec4(1.0f);
             color.a = 0.0f;
             // handle other
-            if (isShop) {
-                GameObject obj(pos, size, tex, color, glm::vec2(0.0f), false, true, isHalfBarrier);
-            }
-
-            GameObject obj(pos, size, tex, color, glm::vec2(0.0f), isBarrier, false, isHalfBarrier);
+            GameObject obj(pos, size, tex, color, glm::vec2(0.0f), isBarrier, isShop, isHalfBarrier);
 
             this->tiles.push_back(obj);
 

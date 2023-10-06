@@ -139,31 +139,44 @@ void ShoppingCart::update(float dt) {
 
 std::vector<std::vector<Item>> ShoppingCart::calculateOptimalPlacement(const std::vector<Item> &items, float rowLimit) {
 
+    // Sort items by space they occupy
     std::vector<Item> sortedItems = items;
     std::sort(sortedItems.begin(), sortedItems.end(), Item::compareItems);
 
+    // Initialize the cart and other variables
     std::vector<std::vector<Item>> cart;
-    cart.push_back({});
+    cart.push_back({}); // Start with the first row
     float currentRowWidth = 0.0f;
     float currentRowHeight = 0.0f;
+    glm::vec2 currentPosition(0.0f, 0.0f);
 
-    for (const Item& item : sortedItems) {
+    // Arrange items in rows and assign positions
+    for (Item& item : sortedItems) {
         // Check if the item fits in the current row
-        if (currentRowWidth + item.width <= this->width && currentRowHeight + item.getHeight() <= rowLimit) {
-            cart.back().push_back(item); // Place item in the current row
-            currentRowWidth += item.width;
+        if (currentRowWidth + item.getWidth() <= width && currentRowHeight + item.getHeight() <= rowLimit) {
+            // Place item in the current row and assign position
+            item.pos = currentPosition;
+            cart.back().push_back(item);
+
+            // Update current position and row dimensions
+            currentPosition.x += item.getWidth();
+            currentRowWidth += item.getWidth();
             if (item.getHeight() > currentRowHeight)
                 currentRowHeight = item.getHeight();
         } else {
-            // Start a new row at the end of the cart
+            // Start a new row below, aligning with the end of the previous row
             cart.push_back({});
-            cart.back().push_back(item);
+            currentPosition = glm::vec2(0.0f, currentPosition.y + currentRowHeight);
             currentRowWidth = item.getWidth();
             currentRowHeight = item.getHeight();
+
+            // Place item in the new row and assign position
+            item.pos = currentPosition;
+            cart.back().push_back(item);
         }
     }
-    return cart;
 
+    return cart;
 
 }
 

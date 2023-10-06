@@ -174,6 +174,8 @@ std::vector<std::vector<Item>> ShoppingCart::calculateOptimalPlacement(const std
         }
     }
 
+    currentCapacity = items.size();
+
     return cart;
 
 }

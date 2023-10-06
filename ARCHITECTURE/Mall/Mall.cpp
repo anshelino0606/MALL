@@ -14,7 +14,6 @@ const float PLAYER_VELOCITY(200.0f);
 GameObject *Player;
 GameObject *Cursor;
 SpriteRenderer* Renderer;
-Shop* shop;
 ShoppingCart* cart;
 
 enum class TileType;
@@ -31,7 +30,10 @@ bool checkCollisions(GameObject &one, GameObject &two)  {
 void Mall::doCollisions() {
     for (GameObject &box : this->level.tiles) {
         if (checkCollisions(*Player, box)) {
-            if (box.isBarrier && !box.isHalfBarrier) {
+            isShop = false;
+            if (box.isBarrier && !box.isHalfBarrier ) {
+                isShop = false;
+
                 float overlapX = std::min(Player->pos.x + Player->size.x - box.pos.x,
                                           box.pos.x + box.size.x - Player->pos.x);
                 float overlapY = std::min(Player->pos.y + Player->size.y - box.pos.y,
@@ -66,6 +68,7 @@ void Mall::doCollisions() {
                     Player->velocity.y = 0.0f;
                 }
             } else if (box.isHalfBarrier && !box.isShop) {
+                isShop = false;
                 float overlapX = std::min(Player->pos.x + Player->size.x - box.pos.x,
                                           box.pos.x + box.size.x - Player->pos.x) / 2.0f;
                 float overlapY = std::min(Player->pos.y + Player->size.y - box.pos.y,
@@ -99,10 +102,11 @@ void Mall::doCollisions() {
                 }
 
             } else if (box.isShop) {
-                this->state = GameStates::GAME_IN_SHOP;
+                isShop = true;
             }
         }
     }
+
 }
 
 Mall::Mall(unsigned int width, unsigned int height)
@@ -153,7 +157,7 @@ void Mall::init()
     ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/transparent.png", true, "blank");
     ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/Box.png", true, "box");
     ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/shop.png", true, "shop");
-    ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/cart.png.png", true, "cart");
+    ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/MALL/ADDONS/Images/cart.png", true, "cart");
     ResourceManager::loadTexture("/Users/anhelinamodenko/CLionProjects/SmartShoppingCart/Game/Assets/Tiles/cursor.png", true, "cursor");
 
     GameLevel level1;
@@ -167,6 +171,7 @@ void Mall::init()
     glm::vec2 mousePos = glm::vec2(this->width / 2 ,this->height / 2);
     Player = new GameObject(playerPos, PLAYER_SIZE, ResourceManager::getTexture("player"));
     Cursor = new GameObject(mousePos, PLAYER_SIZE, ResourceManager::getTexture("cursor"));
+    cart = new ShoppingCart(this->width, this->height, ResourceManager::getTexture("cart"), nullptr);
 
 
 }
@@ -234,10 +239,10 @@ void Mall::processInput(float dt) {
                 Player->pos.y += velocity;
             Player->Sprite = ResourceManager::getTexture("player4");
         }
-        if (Keyboard::keyWentDown(GLFW_KEY_SPACE) ) {
+        if (Keyboard::keyWentDown(GLFW_KEY_SPACE) && isShop) {
             this->state = GameStates::GAME_IN_SHOP;
         }
-        if (Keyboard::keyWentDown(GLFW_KEY_C) ) {
+        if (Keyboard::keyWentDown(GLFW_KEY_C)) {
             this->state = GameStates::GAME_IN_CART;
         }
         if (Keyboard::keyWentDown(GLFW_KEY_P) ) {
@@ -271,7 +276,6 @@ void Mall::processInput(float dt) {
         double y = Mouse::getMouseY();
         Cursor->pos.x = x;
         Cursor->pos.y = y;
-
 
     }
     // Update the camera position based on player movement
@@ -356,6 +360,15 @@ void Mall::render() {
 
 
         Cursor->Draw(*Renderer);
+    }
+
+}
+
+void Mall::fromShopToCart() {
+
+    // push items from shop to cart
+    for (int i = 0; i < shop->getCurrentCapacity(); i++) {
+        cart->addToCart(shop->getItems()[i]);
     }
 
 }

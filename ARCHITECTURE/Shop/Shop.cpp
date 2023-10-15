@@ -315,3 +315,27 @@ std::istream& operator>>(std::istream& is, Shop& shop) {
 
     return is;
 }
+
+Shop &Shop::operator+(const Shop &other) {
+    Shop* newShop = new Shop(*this, other);
+    return *newShop;
+}
+
+Shop &Shop::operator-(const Shop &other) {
+    Shop* newShop = new Shop(*this, other);
+    return *newShop;
+}
+
+Shop &Shop::operator+=(const Shop &other) {
+    this->merge(other);
+    return *this;
+}
+
+Shop &Shop::operator-=(const Shop &other) {
+    this->merge(other);
+    return *this;
+}
+
+
+
+

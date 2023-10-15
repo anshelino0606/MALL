@@ -95,6 +95,9 @@ public:
     Shop& operator+=(const Shop& other);
     Shop& operator-=(const Shop& other);
 
+    friend std::ostream& operator<<(std::ostream& os, const Shop& shop);
+    friend std::istream& operator>>(std::istream& is, Shop& shop);
+
     /*
      * DESCTRUCTOR
      */

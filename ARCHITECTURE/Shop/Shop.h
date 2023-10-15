@@ -98,6 +98,14 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Shop& shop);
     friend std::istream& operator>>(std::istream& is, Shop& shop);
 
+    bool operator==(const Shop& other) const;
+    bool operator!=(const Shop& other) const;
+    bool operator<(const Shop& other) const;
+    bool operator>(const Shop& other) const;
+    bool operator<=(const Shop& other) const;
+    bool operator>=(const Shop& other) const;
+
+
     /*
      * DESCTRUCTOR
      */

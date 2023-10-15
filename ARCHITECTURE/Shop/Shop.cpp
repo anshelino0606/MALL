@@ -360,6 +360,10 @@ bool Shop::operator>=(const Shop &other) const {
     return this->maxCapacity >= other.maxCapacity;
 }
 
+Item &Shop::operator[](int index) {
+    return items[index];
+}
+
 
 
 

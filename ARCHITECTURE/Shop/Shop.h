@@ -105,6 +105,8 @@ public:
     bool operator<=(const Shop& other) const;
     bool operator>=(const Shop& other) const;
 
+    Item& operator[](int index);
+
 
     /*
      * DESCTRUCTOR

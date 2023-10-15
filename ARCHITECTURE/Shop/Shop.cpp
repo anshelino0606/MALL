@@ -336,6 +336,31 @@ Shop &Shop::operator-=(const Shop &other) {
     return *this;
 }
 
+bool Shop::operator==(const Shop &other) const {
+    return this->name == other.name && this->maxCapacity == other.maxCapacity && this->currentCapacity == other.currentCapacity;
+}
+
+bool Shop::operator!=(const Shop &other) const {
+    return this->name != other.name || this->maxCapacity != other.maxCapacity || this->currentCapacity != other.currentCapacity;
+}
+
+bool Shop::operator<(const Shop &other) const {
+    return this->maxCapacity < other.maxCapacity;
+}
+
+bool Shop::operator>(const Shop &other) const {
+    return !(*this < other);
+}
+
+bool Shop::operator<=(const Shop &other) const {
+    return this->maxCapacity <= other.maxCapacity;
+}
+
+bool Shop::operator>=(const Shop &other) const {
+    return this->maxCapacity >= other.maxCapacity;
+}
+
+
 
 
 

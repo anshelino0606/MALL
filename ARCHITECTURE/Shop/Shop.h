@@ -107,6 +107,13 @@ public:
 
     Item& operator[](int index);
 
+    Shop& operator()(const std::string& name, unsigned int maxCapacity, Item* items = nullptr);
+
+    Shop& operator--();
+    Shop& operator--(int);
+    Shop& operator++();
+    Shop& operator++(int);
+
 
     /*
      * DESCTRUCTOR

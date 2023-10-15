@@ -364,7 +364,38 @@ Item &Shop::operator[](int index) {
     return items[index];
 }
 
+Shop &Shop::operator()(const std::string &name, unsigned int maxCapacity, Item *items) {
+    this->name = name;
+    this->maxCapacity = maxCapacity;
+    this->items = items;
+    return *this;
+}
 
+Shop& Shop::operator--() {
+    // suffix decrement
+    this->currentCapacity--;
+    this->maxCapacity--;
+    return *this;
+}
 
+Shop& Shop::operator--(int) {
+    Shop temp(*this);
+    this->currentCapacity--;
+    this->maxCapacity--;
+    return temp;
+}
+
+Shop& Shop::operator++() {
+    this->currentCapacity++;
+    this->maxCapacity++;
+    return *this;
+}
+
+Shop& Shop::operator++(int) {
+    Shop temp(*this);
+    this->currentCapacity++;
+    this->maxCapacity++;
+    return temp;
+}
 
 

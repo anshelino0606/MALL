@@ -296,3 +296,22 @@ void Shop::update(float dt) {
 void Shop::doCollisions() {
 
 }
+
+std::ostream& operator<<(std::ostream& os, const Shop& shop) {
+    shop.print(os);
+    return os;
+}
+
+std::istream& operator>>(std::istream& is, Shop& shop) {
+    std::string name;
+    unsigned int maxCapacity;
+    unsigned int currentCapacity;
+
+    is >> name >> maxCapacity >> currentCapacity;
+
+    shop.setName(name);
+    shop.setMaxCapacity(maxCapacity);
+    shop.setCurrentCapacity(currentCapacity);
+
+    return is;
+}
